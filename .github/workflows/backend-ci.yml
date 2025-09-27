@@ -73,6 +73,13 @@ jobs:
 #          echo "DB_USER=backend_user" >> $GITHUB_ENV
 #          echo "DB_PASS=backend_pass" >> $GITHUB_ENV
 
+      # 5. Configura variáveis de ambiente para testes
+      - name: Set environment variables
+        run: |
+          echo "USER_DB=${{ secrets.USER_DB }}" >> $GITHUB_ENV
+          echo "PASSWORD_DB=${{ secrets.PASSWORD_DB }}" >> $GITHUB_ENV
+          echo "URL_DB=${{ secrets.URL_DB }}" >> $GITHUB_ENV
+
       # 6. Executa os testes do backend
       - name: Run tests
         working-directory: backend
