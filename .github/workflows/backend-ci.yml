@@ -76,4 +76,34 @@ jobs:
       # 6. Executa os testes do backend
       - name: Run tests
         working-directory: backend
-        run: ./gradlew test
+        run: ./gradlew test --continue
+
+      # 6. Upload test reports as artifacts (sempre executa, mesmo se os testes falharem)
+      - name: Upload test reports
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: backend-test-reports-${{ github.run_number }}
+          path: |
+            backend/build/reports/tests/test/
+            backend/build/test-results/test/
+          retention-days: 30
+
+      # 7. Upload build logs em caso de falha
+      - name: Upload build logs on failure
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: backend-build-logs-${{ github.run_number }}
+          path: |
+            backend/build/reports/
+            backend/build/tmp/compileTestJava/
+          retention-days: 7
+
+      # 8. Publish test results
+      - name: Publish test results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: always()
+        with:
+          files: |
+            backend/build/test-results/test/*.xml

@@ -66,3 +66,4 @@ As tecnologias utilizadas são:
 ### Como contribuir
 
 Caso queira contribuir com o projeto, por favor, entre em contato por meio do email fernando88to@gmail.com
+
