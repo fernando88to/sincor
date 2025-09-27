@@ -8,6 +8,15 @@ on:
     paths:
       - 'backend/**'
 
+
+# Adicione estas permissões para o workflow
+permissions:
+  contents: read
+  checks: write
+  pull-requests: write
+  actions: read
+
+
 jobs:
   test-backend:
     name: Run Backend Tests
