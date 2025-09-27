@@ -10,6 +10,7 @@ on:
 
 
 # Adicione estas permissões para o workflow
+# foi necessária para etapa de Publish test results
 permissions:
   contents: read
   checks: write
@@ -72,15 +73,6 @@ jobs:
             sleep 4
           done
           echo "MySQL did not start in time" && exit 1
-
-      # 5. Configura variáveis de ambiente para testes
-#      - name: Set environment variables
-#        run: |
-#          echo "DB_HOST=localhost" >> $GITHUB_ENV
-#          echo "DB_PORT=3306" >> $GITHUB_ENV
-#          echo "DB_NAME=backend_test" >> $GITHUB_ENV
-#          echo "DB_USER=backend_user" >> $GITHUB_ENV
-#          echo "DB_PASS=backend_pass" >> $GITHUB_ENV
 
       # 5. Configura variáveis de ambiente para testes
       - name: Set environment variables
