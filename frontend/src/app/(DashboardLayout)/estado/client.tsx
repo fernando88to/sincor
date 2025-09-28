@@ -16,7 +16,7 @@ export const PageClientComarca = ({estados}: { estados: Estado[] }) => {
                         paginationModel: {page: 0, pageSize: 50},
                     },
                 }}
-                pageSizeOptions={[5, 10]}
+                pageSizeOptions={[50, 100]}
             />
         </div>
     );
