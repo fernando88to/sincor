@@ -28,9 +28,9 @@ const Menuitems = [
     },
     {
         id: uniqueId(),
-        title: "Comarca",
+        title: "Estado",
         icon: IconTypography,
-        href: "/comarca",
+        href: "/estado",
     },
     {
         id: uniqueId(),

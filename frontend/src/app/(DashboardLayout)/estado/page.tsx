@@ -1,20 +1,23 @@
-'use client';
-import {Table, TableBody, TableCell, TableHead, TableRow} from '@mui/material';
+
 import {DataGrid} from '@mui/x-data-grid';
 import PageContainer from '@/app/(DashboardLayout)/components/container/PageContainer';
 import DashboardCard from '@/app/(DashboardLayout)/components/shared/DashboardCard';
+import {PageClientComarca} from "@/app/(DashboardLayout)/estado/client";
+import {clientBackendEstado} from "@/client/clientBackEnd";
+import {Metadata} from "next";
 
 
-const SamplePage = () => {
-    const comarcas = [
-        {id: 1, nome: 'Comarca de São Paulo', entrancia: 3},
-        {id: 2, nome: 'Comarca de Campinas', entrancia: 3},
-        {id: 3, nome: 'Comarca de Santos', entrancia: 3},
-        {id: 4, nome: 'Comarca de Ribeirão Preto', entrancia: 3},
-        {id: 5, nome: 'Comarca de Jundiaí', entrancia: 2},
-        {id: 6, nome: 'Comarca de Itu', entrancia: 2},
-        {id: 7, nome: 'Comarca de Atibaia', entrancia: 1},
-    ];
+
+export const dynamic = 'force-dynamic' // defaults to auto
+
+
+export const metadata: Metadata = {
+    title: 'Estados',
+};
+
+const SamplePage = async () => {
+
+    const rows = await clientBackendEstado.listAll();
 
     return (
         <PageContainer title="Comarcas" description="Listagem de Comarcas">
@@ -38,23 +41,7 @@ const SamplePage = () => {
                             ))}
                         </TableBody>
                     </Table>*/}
-
-                <div style={{height: 400, width: '100%', marginTop: '20px'}}>
-                    <DataGrid
-                        rows={comarcas}
-                        columns={[
-                            {field: 'id', headerName: 'ID', width: 90},
-                            {field: 'nome', headerName: 'Nome', width: 300},
-                            {field: 'entrancia', headerName: 'Entrância', width: 130},
-                        ]}
-                        initialState={{
-                            pagination: {
-                                paginationModel: {page: 0, pageSize: 5},
-                            },
-                        }}
-                        pageSizeOptions={[5, 10]}
-                    />
-                </div>
+                    <PageClientComarca estados={rows} />
             </DashboardCard>
     </PageContainer>
   );
