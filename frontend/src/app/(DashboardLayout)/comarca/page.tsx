@@ -20,7 +20,7 @@ const SamplePage = () => {
         <PageContainer title="Comarcas" description="Listagem de Comarcas">
             <DashboardCard title="Comarcas">
 
-                    <Table sx={{minWidth: 650}} aria-label="tabela de comarcas">
+                    {/*<Table sx={{minWidth: 650}} aria-label="tabela de comarcas">
                         <TableHead>
                             <TableRow>
                                 <TableCell>ID</TableCell>
@@ -37,7 +37,7 @@ const SamplePage = () => {
                                 </TableRow>
                             ))}
                         </TableBody>
-                    </Table>
+                    </Table>*/}
 
                 <div style={{height: 400, width: '100%', marginTop: '20px'}}>
                     <DataGrid
