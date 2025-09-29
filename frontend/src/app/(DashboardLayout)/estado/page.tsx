@@ -20,27 +20,8 @@ const SamplePage = async () => {
     const rows = await clientBackendEstado.listAll();
 
     return (
-        <PageContainer title="Comarcas" description="Listagem de Comarcas">
-            <DashboardCard title="Comarcas">
-
-                    {/*<Table sx={{minWidth: 650}} aria-label="tabela de comarcas">
-                        <TableHead>
-                            <TableRow>
-                                <TableCell>ID</TableCell>
-                                <TableCell>Nome</TableCell>
-                                <TableCell>Entrância</TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {comarcas.map((comarca) => (
-                                <TableRow key={comarca.id}>
-                                    <TableCell>{comarca.id}</TableCell>
-                                    <TableCell>{comarca.nome}</TableCell>
-                                    <TableCell>{comarca.entrancia}</TableCell>
-                                </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>*/}
+        <PageContainer title="Estado" description="Listagem dos Estados">
+            <DashboardCard title="Estados">
                     <PageClientComarca estados={rows} />
             </DashboardCard>
     </PageContainer>

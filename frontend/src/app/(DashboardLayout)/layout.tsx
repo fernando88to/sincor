@@ -62,7 +62,7 @@ export default function RootLayout({
                   // sm: '100%',
                   // md: '100%',
                   lg: '1200px',
-                  xl: 'none'
+                  xl: '1600px'
               }
           }}
         >
