@@ -33,6 +33,8 @@ export async function chamarAxios(url: string, metodo_utilizado: string, dados: 
 
 export const clientBackendEstado = {
     listAll: async (): Promise<Estado[]> => {
+        await new Promise(resolve => setTimeout(resolve, 3000));
+
         const retornoApi = await chamarAxios('/estado', METHOD.GET, {},);
         if (retornoApi.data == undefined) {
             return [];

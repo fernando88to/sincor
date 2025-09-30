@@ -5,6 +5,8 @@ export const PageClientComarca = ({estados}: { estados: Estado[] }) => {
     return (
         <div style={{height: '100%', width: '100%', marginTop: '20px'}}>
             <DataGrid
+
+
                 rows={estados}
                 columns={[
                     {field: 'id', headerName: 'ID', width: 120},
