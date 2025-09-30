@@ -34,6 +34,12 @@ const Menuitems = [
     },
     {
         id: uniqueId(),
+        title: "Comarca",
+        icon: IconTypography,
+        href: "/comarca",
+    },
+    {
+        id: uniqueId(),
         title: "Distrito",
         icon: IconCopy,
         href: "/utilities/shadow",
