@@ -7,8 +7,8 @@ export const PageClientComarca = ({estados}: { estados: Estado[] }) => {
             <DataGrid
                 rows={estados}
                 columns={[
-                    {field: 'id', headerName: 'ID', width: 90},
-                    {field: 'nome', headerName: 'Nome', width: 300},
+                    {field: 'id', headerName: 'ID', width: 120},
+                    {field: 'nome', headerName: 'Nome', flex:1, minWidth:150},
                     {field: 'sigla', headerName: 'Sigla', width: 300},
                 ]}
                 initialState={{
