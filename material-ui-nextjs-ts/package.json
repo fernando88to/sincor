@@ -15,9 +15,14 @@
     "@mui/icons-material": "latest",
     "@mui/material": "latest",
     "@mui/material-nextjs": "latest",
+    "@mui/x-data-grid": "^8.13.1",
+    "@tabler/icons-react": "^3.35.0",
+    "axios": "^1.12.2",
+    "lodash": "^4.17.21",
     "next": "^15.0.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-mui-sidebar": "^1.6.3"
   },
   "devDependencies": {
     "@types/node": "latest",
