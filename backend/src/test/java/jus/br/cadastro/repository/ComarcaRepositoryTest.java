@@ -19,12 +19,11 @@ class ComarcaRepositoryTest {
 
     @Test
     public void testListOrderByNomeAsc() {
-        // Chama o método que está sendo testado
+        // When (Quando) - Ação sendo testada
         List<Comarca> comarcas = comarcaRepository.listOrderByNomeAsc();
-
+        // Then (Então) - Resultado esperado
         assertNotNull(comarcas);
         assertFalse(comarcas.isEmpty());
-
         // Verifica se a lista está ordenada pelo nome
         assertEquals(comarcas.stream()
                 .sorted(Comparator.comparing(c -> c.nome))
@@ -34,7 +33,6 @@ class ComarcaRepositoryTest {
         for (int i = 0; i < comarcas.size() - 1; i++) {
             assertTrue(comarcas.get(i).nome.compareTo(comarcas.get(i + 1).nome) <= 0);
         }
-
     }
 
 }
