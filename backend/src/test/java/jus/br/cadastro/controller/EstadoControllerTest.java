@@ -19,7 +19,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 @QuarkusTest
-class EstadoControllerTest {
+class
+EstadoControllerTest {
 
     @Inject
     EstadoRepository estadoRepository;

@@ -16,7 +16,6 @@ class ComarcaRepositoryTest {
     @Inject
     ComarcaRepository comarcaRepository;
 
-
     @Test
     public void testListOrderByNomeAsc() {
         // When (Quando) - Ação sendo testada
