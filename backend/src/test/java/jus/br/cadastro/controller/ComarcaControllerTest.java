@@ -22,7 +22,8 @@ class ComarcaControllerTest {
                         org.hamcrest.Matchers.hasKey("id"),
                         org.hamcrest.Matchers.hasKey("nome"),
                         org.hamcrest.Matchers.hasKey("entrancia"),
-                        org.hamcrest.Matchers.aMapWithSize(3)
+                        org.hamcrest.Matchers.hasKey("estado"),
+                        org.hamcrest.Matchers.aMapWithSize(4)
                 ));
     }
 

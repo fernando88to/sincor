@@ -2,10 +2,8 @@ package jus.br.cadastro.domain;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
 import java.util.Objects;
 
 @Entity
@@ -19,6 +17,9 @@ public class Comarca extends PanacheEntityBase {
     public String nome;
     @Column(name = "ENTRANCIA")
     public Integer entrancia;
+    @ManyToOne
+    @JoinColumn(name = "ID_ESTADO", nullable = false)
+    public Estado estado;
 
     public Comarca() {
     }

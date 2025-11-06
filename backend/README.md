@@ -1,18 +1,15 @@
 # sicor
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
-If you want to learn more about Quarkus, please visit its website: <https://quarkus.io/>.
-
-## Running the application in dev mode
-
-You can run your application in dev mode that enables live coding using:
+### Comandos 
 
 ```shell script
+#Executa o backend no modo de desenvolvimento
 ./gradlew quarkusDev
+./gradlew test
 ```
 
-> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at <http://localhost:8080/q/dev/>.
+
 
 ## Packaging and running the application
 
@@ -54,10 +51,4 @@ You can then execute your native executable with: `./build/sicor-1.0.0-SNAPSHOT-
 If you want to learn more about building native executables, please consult <https://quarkus.io/guides/gradle-tooling>.
 
 ## Provided Code
-
-### REST
-
-Easily start your REST Web Services
-
-[Related guide section...](https://quarkus.io/guides/getting-started-reactive#reactive-jax-rs-resources)
 
