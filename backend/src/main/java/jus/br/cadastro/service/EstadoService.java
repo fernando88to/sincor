@@ -2,6 +2,7 @@ package jus.br.cadastro.service;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import jus.br.cadastro.domain.Estado;
 import jus.br.cadastro.repository.EstadoRepository;
@@ -14,6 +15,9 @@ public class EstadoService {
     @Inject
     EstadoRepository estadoRepository;
 
+    @Inject
+    EntityManager entityManager;
+
     @Transactional
     public Estado mudarEstadoPadrao(String sigla) {
         Optional<Estado> estado = estadoRepository.findBySigla(sigla);
@@ -24,6 +28,8 @@ public class EstadoService {
         estadoRepository.update("estadoPadrao = null");
         // 2 - Atualizar somente o estado informado para estadoPadrao = TRUE
         estadoRepository.update("estadoPadrao = true where sigla = ?1", sigla);
-        return estadoRepository.findBySigla(sigla).get();
+        entityManager.clear();
+        Estado estadoAtualizado = estadoRepository.findBySigla(sigla).get();
+        return  estadoAtualizado;
     }
 }
