@@ -13,9 +13,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
+import static org.junit.jupiter.api.Assertions.*;
 
 
 @QuarkusTest
@@ -74,6 +72,8 @@ EstadoControllerTest {
                 });
 
         assertNotNull(estado);
+        assertTrue(estado.estadoPadrao);
+        assertEquals("TO", estado.sigla);
 
         Estado estadaoTocantins = estadoRepository.findBySigla("TO").get();
         assertTrue(estadaoTocantins.estadoPadrao);
