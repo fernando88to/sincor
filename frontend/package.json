@@ -25,6 +25,7 @@
     "react-mui-sidebar": "^1.6.3"
   },
   "devDependencies": {
+    "@types/lodash": "^4.17.20",
     "@types/node": "latest",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",

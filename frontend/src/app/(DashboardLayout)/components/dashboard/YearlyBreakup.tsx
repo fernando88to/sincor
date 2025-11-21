@@ -1,6 +1,6 @@
 
 import dynamic from "next/dynamic";
-const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
+// const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 import { useTheme } from '@mui/material/styles';
 import { Grid, Stack, Typography, Avatar } from '@mui/material';
 import { IconArrowUpLeft } from '@tabler/icons-react';
@@ -110,12 +110,12 @@ const YearlyBreakup = () => {
             xs: 5,
             sm: 5
           }}>
-          <Chart
-            options={optionscolumnchart}
-            series={seriescolumnchart}
-            type="donut"
-            height={150} width={"100%"}
-          />
+          {/*<Chart*/}
+          {/*  options={optionscolumnchart}*/}
+          {/*  series={seriescolumnchart}*/}
+          {/*  type="donut"*/}
+          {/*  height={150} width={"100%"}*/}
+          {/*/>*/}
         </Grid>
       </Grid>
     </DashboardCard>

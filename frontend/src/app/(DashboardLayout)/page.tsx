@@ -31,7 +31,7 @@ const Dashboard = () => {
                 <YearlyBreakup />
               </Grid>
               <Grid size={12}>
-                <MonthlyEarnings />
+                {/*<MonthlyEarnings />*/}
               </Grid>
             </Grid>
           </Grid>

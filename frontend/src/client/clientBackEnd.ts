@@ -1,5 +1,6 @@
 import axios, {AxiosInstance} from "axios";
 import {Estado} from "@/type/Estado";
+import {Comarca} from "@/type/Comarca";
 
 const ENDERECO_BACKEND = "http://localhost:8080/";
 const APPLICATION_JSON = 'application/json';
@@ -33,15 +34,26 @@ export async function chamarAxios(url: string, metodo_utilizado: string, dados: 
 
 export const clientBackendEstado = {
     listAll: async (): Promise<Estado[]> => {
-        await new Promise(resolve => setTimeout(resolve, 3000));
-
+        // await new Promise(resolve => setTimeout(resolve, 3000));
         const retornoApi = await chamarAxios('/estado', METHOD.GET, {},);
         if (retornoApi.data == undefined) {
             return [];
         }
         return retornoApi.data as Estado[];
     },
+}
+export const clientBackendComarca = {
+    listAll: async (): Promise<Comarca[]> => {
+        // await new Promise(resolve => setTimeout(resolve, 3000));
+
+        const retornoApi = await chamarAxios('/comarca', METHOD.GET, {},);
+        if (retornoApi.data == undefined) {
+            return [];
+        }
+        return retornoApi.data as Comarca[];
+    },
 
 
 }
+
 

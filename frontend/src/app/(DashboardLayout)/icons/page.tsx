@@ -2,8 +2,8 @@
 import PageContainer from '@/app/(DashboardLayout)/components/container/PageContainer';
 import DashboardCard from '@/app/(DashboardLayout)/components/shared/DashboardCard';
 import { Typography, Link, Box, Divider } from '@mui/material';
-import { docco } from "react-syntax-highlighter/dist/esm/styles/hljs";
-import SyntaxHighlighter from "react-syntax-highlighter";
+// import { docco } from "react-syntax-highlighter/dist/esm/styles/hljs";
+// import SyntaxHighlighter from "react-syntax-highlighter";
 
 const Icons = () => {
   return (
@@ -37,9 +37,9 @@ const Icons = () => {
         <Typography variant="body1" gutterBottom>
           To use Tabler icons in your project, install the official React package:
         </Typography>
-        <SyntaxHighlighter language="typescript" style={docco}>
-          {` npm install @tabler/icons-react `}
-        </SyntaxHighlighter>
+        {/*<SyntaxHighlighter language="typescript" style={docco}>*/}
+        {/*  {` npm install @tabler/icons-react `}*/}
+        {/*</SyntaxHighlighter>*/}
 
 
         <Divider sx={{ my: 3 }} />
@@ -51,12 +51,12 @@ const Icons = () => {
         <Typography variant="body1" gutterBottom>
           Import and use any icon in your components:
         </Typography>
-        <SyntaxHighlighter language="typescript" style={docco}>
-          {`import { IconHome } from '@tabler/icons-react';
-function MyComponent() {
-  return <IconHome />;
-}`}
-        </SyntaxHighlighter>
+{/*        <SyntaxHighlighter language="typescript" style={docco}>*/}
+{/*          {`import { IconHome } from '@tabler/icons-react';*/}
+{/*function MyComponent() {*/}
+{/*  return <IconHome />;*/}
+{/*}`}*/}
+{/*        </SyntaxHighlighter>*/}
       </DashboardCard>
     </PageContainer>
   );

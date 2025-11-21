@@ -3,7 +3,7 @@ import { Select, MenuItem } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import DashboardCard from '@/app/(DashboardLayout)/components/shared/DashboardCard';
 import dynamic from "next/dynamic";
-const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
+// const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 
 const SalesOverview = () => {
@@ -104,12 +104,12 @@ const SalesOverview = () => {
                 <MenuItem value={3}>May 2025</MenuItem>
             </Select>
         }>
-            <Chart
-                options={optionscolumnchart}
-                series={seriescolumnchart}
-                type="bar"
-                height={370} width={"100%"}
-            />
+            {/*<Chart*/}
+            {/*    options={optionscolumnchart}*/}
+            {/*    series={seriescolumnchart}*/}
+            {/*    type="bar"*/}
+            {/*    height={370} width={"100%"}*/}
+            {/*/>*/}
         </DashboardCard>
     );
 };

@@ -1,28 +1,24 @@
-
-import {DataGrid} from '@mui/x-data-grid';
 import PageContainer from '@/app/(DashboardLayout)/components/container/PageContainer';
 import DashboardCard from '@/app/(DashboardLayout)/components/shared/DashboardCard';
-import {PageClientComarca} from "@/app/(DashboardLayout)/estado/client";
-import {clientBackendEstado} from "@/client/clientBackEnd";
+import {PageClientComarca} from "@/app/(DashboardLayout)/comarca/clientComarcas";
+import {clientBackendComarca} from "@/client/clientBackEnd";
 import {Metadata} from "next";
-
-
 
 export const dynamic = 'force-dynamic' // defaults to auto
 
 
 export const metadata: Metadata = {
-    title: 'Estados',
+    title: 'Comarcas',
 };
 
 const SamplePage = async () => {
 
-    const rows = await clientBackendEstado.listAll();
+    const rows = await clientBackendComarca.listAll();
 
     return (
-        <PageContainer title="Estado" description="Listagem dos Estados">
-            <DashboardCard title="Estados">
-                    <PageClientComarca estados={rows} />
+        <PageContainer title="Comarcas" description="Listagem das Comarcas">
+            <DashboardCard title="Comarcas">
+                    <PageClientComarca comarcas={rows} />
             </DashboardCard>
     </PageContainer>
   );
