@@ -1,6 +1,6 @@
 import PageContainer from '@/app/(DashboardLayout)/components/container/PageContainer';
 import DashboardCard from '@/app/(DashboardLayout)/components/shared/DashboardCard';
-import {PageClientComarca} from "@/app/(DashboardLayout)/comarca/clientComarcas";
+import PageClientComarca from "@/app/(DashboardLayout)/comarca/clientComarcas";
 import {clientBackendComarca} from "@/client/clientBackEnd";
 import {Metadata} from "next";
 
