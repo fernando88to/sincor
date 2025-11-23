@@ -4,16 +4,24 @@ import {PlusCircledIcon} from "@radix-ui/react-icons";
 import {generateMeta} from "@/lib/utils";
 import EstadoClientePage from "@/app/dashboard/pages/estados/listagem/UserClientPage";
 import {clientBackendEstado} from "@/client/clientBackEnd";
+import {Metadata} from "next";
 
-export async function generateMetadata() {
-  return generateMeta({
-    title: "Estados",
-    description:
-        "Lista de Estados do Sistema.",
-    canonical: "/pages/estados"
-  });
-}
+// export async function generateMetadata() {
+//   return generateMeta({
+//     title: "Estados",
+//     description:
+//         "Lista de Estados do Sistema.",
+//     canonical: "/pages/estados"
+//   });
+// }
 
+
+export const dynamic = 'force-dynamic' // defaults to auto
+
+
+export const metadata: Metadata = {
+    title: 'Estados',
+};
 
 
 
