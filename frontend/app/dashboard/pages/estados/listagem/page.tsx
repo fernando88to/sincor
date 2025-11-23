@@ -1,7 +1,6 @@
 import Link from "next/link";
 import {Button} from "@/components/ui/button";
 import {PlusCircledIcon} from "@radix-ui/react-icons";
-import {generateMeta} from "@/lib/utils";
 import EstadoClientePage from "@/app/dashboard/pages/estados/listagem/UserClientPage";
 import {clientBackendEstado} from "@/client/clientBackEnd";
 import {Metadata} from "next";

@@ -1,71 +1,64 @@
 'use client';
 import {Button} from "@/components/ui/button";
 import {Card, CardContent, CardFooter, CardHeader, CardTitle} from "@/components/ui/card";
-import {Input} from "@/components/ui/input";
 import * as React from "react";
+import {useActionState} from "react";
 import {Combobox, OptionType} from "@/components/Combobox";
 import {Estado} from "@/type/Estado";
+import {ActionState, cadastrarUsuario} from '@/app/dashboard/pages/estados/editarEstadoPadrao/actions'
 
 
-const frameworks: OptionType[] = [
-    {
-        value: "next.js",
-        label: "Next.js",
-    },
-    {
-        value: "sveltekit",
-        label: "SvelteKit",
+const initialState = {
+    success: false,
+    message: '',
+};
 
-    },
-    {
-        value: "nuxt.js",
-        label: "Nuxt.js",
-    },
-    {
-        value: "remix",
-        label: "Remix",
-    },
-    {
-        value: "astro",
-        label: "Astro",
-    },
-]
+export function EditarEstadoPadraoPageCliente({estados}: { estados: Estado[] }) {
 
-export function EditarEstadoPadraoPageCliente({estados}: { estados: Estado[]}) {
-
-    let estadosFormatoOption: OptionType[] = estados.map((estado) => ({
+    const estadosFormatoOption: OptionType[] = estados.map((estado) => ({
         value: estado.id.toString(),
         label: estado.nome,
     }));
-    let estadoSelecionado = estados.find((elemento) => {
+    const estadoSelecionado = estados.find((elemento) => {
         return elemento.estadoPadrao;
     });
 
+    const [state, formAction, isPending] = useActionState<ActionState, FormData>(cadastrarUsuario, initialState);
+
     return (
         <>
-            <Card className="w-full mt-5">
-                <CardHeader className="flex flex-row items-center">
-                    <CardTitle>Selecione o estado padrão</CardTitle>
-                </CardHeader>
-                <CardContent>
-                    <Combobox options={estadosFormatoOption} defaultValue={estadoSelecionado?.id.toString()}  />
-                </CardContent>
+            <form action={formAction} className="flex flex-col gap-4">
+                <Card className="w-full mt-5">
+                    <CardHeader className="flex flex-row items-center">
+                        <CardTitle>Selecione o estado padrão</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+
+                        <Combobox options={estadosFormatoOption} defaultValue={estadoSelecionado?.id.toString()}/>
+
+                        {state?.errors?.name && (
+                            <p className="text-red-500 text-sm mt-1">{state.errors.name[0]}</p>
+                        )}
 
 
-                <CardFooter>
-                    <div className="flex w-full items-center space-x-2">
-                        <Button variant="outline" className="w-full">
-                            Cancelar
-                        </Button>
-                        <Button type="submit" className="w-full">
-                            Salvar
-                        </Button>
-                    </div>
+                    </CardContent>
 
 
-                </CardFooter>
+                    <CardFooter>
+                        <div className="flex w-full items-center space-x-2">
+                            <Button variant="outline" className="w-full">
+                                Cancelar
+                            </Button>
+                            <Button type="submit" className="w-full" disabled={isPending}>
+                                {isPending ? 'Salvando...' : 'Cadastrar'}
+                            </Button>
+                        </div>
 
-            </Card>
+
+                    </CardFooter>
+
+                </Card>
+            </form>
 
         </>
     );

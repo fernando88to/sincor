@@ -32,6 +32,7 @@ interface ComboboxProps {
     placeholder?: string // Texto do botão quando nada selecionado
     searchPlaceholder?: string // Texto do input de busca
     emptyMessage?: string // Texto quando não acha nada
+    className?: string
 }
 
 export function Combobox({
