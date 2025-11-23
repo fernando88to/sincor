@@ -5,6 +5,7 @@ import {DataTable} from "@/components/custom/datatable/DataTable";
 import {ColumnDef} from "@tanstack/react-table";
 import {Estado} from "@/type/Estado";
 import {SortColumn} from "@/components/custom/datatable/SortColumn";
+import {BadgeBoolean} from "@/components/custom/badge/BadgeBoolean";
 
 const columns: ColumnDef<Estado>[] = [
     {
@@ -13,21 +14,26 @@ const columns: ColumnDef<Estado>[] = [
     },
     {
         accessorKey: "nome",
-        header: ({ column }) => {
-            return <SortColumn title="Email" column={column} />
+        header: ({column}) => {
+            return <SortColumn title="Email" column={column}/>
         },
     },
     {
         accessorKey: "sigla",
-        header: ({ column }) => {
-            return <SortColumn title="Sigla" column={column} />
+        header: ({column}) => {
+            return <SortColumn title="Sigla" column={column}/>
         },
     },
     {
         accessorKey: "estadoPadrao",
-        header: ({ column }) => {
-            return <SortColumn title="Estado Padrão" column={column} />
+        header: ({column}) => {
+            return <SortColumn title="Estado Padrão" column={column}/>
         },
+        cell: ({row}) => {
+            return <div className="flex justify-center">
+                <BadgeBoolean value={row.getValue("estadoPadrao")}/>
+            </div>
+        }
     },
     // {
     //     accessorKey: "country",
