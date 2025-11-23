@@ -3,11 +3,10 @@ import {Button} from "@/components/ui/button";
 import {Card, CardContent, CardFooter, CardHeader, CardTitle} from "@/components/ui/card";
 import * as React from "react";
 import {useActionState} from "react";
-import {Combobox, OptionType} from "@/components/Combobox";
+import {Combobox} from "@/components/Combobox";
 import {Estado} from "@/type/Estado";
 import {ActionState, cadastrarUsuario} from '@/app/dashboard/pages/estados/editarEstadoPadrao/actions'
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label"
+import {Label} from "@/components/ui/label"
 import {useRouter} from "next/navigation";
 
 
@@ -80,17 +79,12 @@ export function EditarEstadoPadraoPageCliente({estados}: { estados: Estado[] }) 
                             </div>
                         </div>
 
-
-
-
-
-
                     </CardContent>
 
 
                     <CardFooter>
                         <div className="flex w-full items-center space-x-2">
-                            <Button variant="outline" className="w-full" onClick={voltar}>
+                            <Button type="button" variant="outline" className="w-full" onClick={voltar}>
                                 Cancelar
                             </Button>
                             <Button type="submit" className="w-full" disabled={isPending}>
