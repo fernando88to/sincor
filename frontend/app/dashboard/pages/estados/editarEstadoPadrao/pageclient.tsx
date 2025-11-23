@@ -6,6 +6,8 @@ import {useActionState} from "react";
 import {Combobox, OptionType} from "@/components/Combobox";
 import {Estado} from "@/type/Estado";
 import {ActionState, cadastrarUsuario} from '@/app/dashboard/pages/estados/editarEstadoPadrao/actions'
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label"
 
 
 const initialState = {
@@ -27,18 +29,54 @@ export function EditarEstadoPadraoPageCliente({estados}: { estados: Estado[] }) 
 
     return (
         <>
-            <form action={formAction} className="flex flex-col gap-4">
-                <Card className="w-full mt-5">
+            <form action={formAction} className="flex flex-col">
+                <Card className="mt-5">
                     <CardHeader className="flex flex-row items-center">
                         <CardTitle>Selecione o estado padrão</CardTitle>
                     </CardHeader>
                     <CardContent>
 
-                        <Combobox options={estadosFormatoOption} defaultValue={estadoSelecionado?.id.toString()}/>
+                        {/*<div className="w-full grid grid-cols-2 gap-4">*/}
+                        {/*    /!* Item 1: Linha 1, Coluna 1 *!/*/}
+                        {/*    <div className="space-y-2">*/}
+                        {/*        <Label htmlFor="nome">Nome</Label>*/}
+                        {/*        <Input id="nome" placeholder="Digite seu nome" />*/}
+                        {/*    </div>*/}
 
-                        {state?.errors?.name && (
-                            <p className="text-red-500 text-sm mt-1">{state.errors.name[0]}</p>
-                        )}
+                        {/*    /!* Item 2: Linha 1, Coluna 2 *!/*/}
+                        {/*    <div className="space-y-2">*/}
+                        {/*        <Label htmlFor="sobrenome">Sobrenome</Label>*/}
+                        {/*        <Input id="sobrenome" placeholder="Digite seu sobrenome" />*/}
+                        {/*    </div>*/}
+
+                        {/*    /!* Item 3: Linha 2, Coluna 1 *!/*/}
+                        {/*    <div className="space-y-2">*/}
+                        {/*        <Label htmlFor="email">Email</Label>*/}
+                        {/*        <Input id="email" type="email" placeholder="seu@email.com" />*/}
+                        {/*    </div>*/}
+
+                        {/*    /!* Item 4: Linha 2, Coluna 2 *!/*/}
+                        {/*    <div className="space-y-2">*/}
+                        {/*        <Label htmlFor="cargo">Cargo</Label>*/}
+                        {/*        <Input id="cargo" placeholder="Ex: Desenvolvedor" />*/}
+                        {/*    </div>*/}
+                        {/*</div>*/}
+
+
+                        <div className="w-full grid grid-cols-1 gap-4">
+                            {/* Item 1: Linha 1, Coluna 1 */}
+                            <div className="space-y-2">
+                                <Label htmlFor="nome">Estado</Label>
+                                <Combobox options={estadosFormatoOption} defaultValue={estadoSelecionado?.id.toString()}/>
+                                {state?.errors?.name && (
+                                    <p className="text-red-500 text-sm mt-1">{state.errors.name[0]}</p>
+                                )}
+                            </div>
+                        </div>
+
+
+
+
 
 
                     </CardContent>
