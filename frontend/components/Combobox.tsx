@@ -34,6 +34,7 @@ interface ComboboxProps<T = any> {
     placeholder?: string // Texto do botão quando nada selecionado
     searchPlaceholder?: string // Texto do input de busca
     emptyMessage?: string // Texto quando não acha nada
+    firstOptionLabel?: string // Label da primeira opção especial com value "0" (ex: "Selecionar Todos")
     className?: string
 }
 
@@ -46,6 +47,7 @@ export function Combobox<T = any>({
                                       placeholder = "Selecione um item...",
                                       searchPlaceholder = "Procurar...",
                                       emptyMessage = "Nenhum item encontrado.",
+                                      firstOptionLabel,
                                   }: ComboboxProps<T>) {
     const [open, setOpen] = React.useState(false)
     const [value, setValue] = React.useState(defaultValue)
@@ -73,7 +75,9 @@ export function Combobox<T = any>({
 
     // Encontra o label baseado no valor selecionado
     const selectedLabel = value
-        ? options.find((option) => String(option[valueKey]) === value)?.[labelKey]
+        ? value === "0" && firstOptionLabel
+            ? firstOptionLabel
+            : options.find((option) => String(option[valueKey]) === value)?.[labelKey]
         : placeholder
 
     return (
@@ -95,6 +99,23 @@ export function Combobox<T = any>({
                     <CommandList>
                         <CommandEmpty>{emptyMessage}</CommandEmpty>
                         <CommandGroup>
+                            {firstOptionLabel && (
+                                <CommandItem
+                                    key="0"
+                                    value={firstOptionLabel}
+                                    onSelect={() => {
+                                        handleSelect("0")
+                                    }}
+                                >
+                                    {firstOptionLabel}
+                                    <Check
+                                        className={cn(
+                                            "ml-auto h-4 w-4",
+                                            value === "0" ? "opacity-100" : "opacity-0"
+                                        )}
+                                    />
+                                </CommandItem>
+                            )}
                             {options.map((option) => {
                                 const optionValue = String(option[valueKey])
                                 const optionLabel = String(option[labelKey])

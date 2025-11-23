@@ -8,6 +8,7 @@ import {Estado} from "@/type/Estado";
 import {ActionState, cadastrarUsuario} from '@/app/dashboard/pages/estados/editarEstadoPadrao/actions'
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label"
+import {useRouter} from "next/navigation";
 
 
 const initialState = {
@@ -22,6 +23,12 @@ export function EditarEstadoPadraoPageCliente({estados}: { estados: Estado[] }) 
     });
 
     const [state, formAction, isPending] = useActionState<ActionState, FormData>(cadastrarUsuario, initialState);
+
+    const router = useRouter();
+
+    const voltar = ()=>{
+        router.push('/dashboard/pages/estados/listagem')
+    }
 
     return (
         <>
@@ -64,6 +71,7 @@ export function EditarEstadoPadraoPageCliente({estados}: { estados: Estado[] }) 
                             <div className="space-y-2">
                                 <Label htmlFor="nome">Estado</Label>
                                 <Combobox options={estados}
+                                          firstOptionLabel="Nenhum estado selecionado"
                                           labelKey="nome" valueKey="id"
                                           defaultValue={estadoSelecionado?.id.toString()}/>
                                 {state?.errors?.name && (
@@ -82,7 +90,7 @@ export function EditarEstadoPadraoPageCliente({estados}: { estados: Estado[] }) 
 
                     <CardFooter>
                         <div className="flex w-full items-center space-x-2">
-                            <Button variant="outline" className="w-full">
+                            <Button variant="outline" className="w-full" onClick={voltar}>
                                 Cancelar
                             </Button>
                             <Button type="submit" className="w-full" disabled={isPending}>
