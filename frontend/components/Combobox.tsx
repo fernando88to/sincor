@@ -25,8 +25,10 @@ export interface OptionType {
     label: string
 }
 
-interface ComboboxProps {
-    options: OptionType[]
+interface ComboboxProps<T = any> {
+    options: T[]
+    valueKey: keyof T // Nome da propriedade que será usada como value
+    labelKey: keyof T // Nome da propriedade que será usada como label
     defaultValue?: string // Argumento opcional (chave do elemento padrão)
     onChange?: (value: string) => void // Função de callback quando seleciona
     placeholder?: string // Texto do botão quando nada selecionado
@@ -35,14 +37,16 @@ interface ComboboxProps {
     className?: string
 }
 
-export function Combobox({
-                             options,
-                             defaultValue = "", // Se não tiver padrão, fica vazio
-                             onChange,
-                             placeholder = "Selecione um item...",
-                             searchPlaceholder = "Procurar...",
-                             emptyMessage = "Nenhum item encontrado.",
-                         }: ComboboxProps) {
+export function Combobox<T = any>({
+                                      options,
+                                      valueKey,
+                                      labelKey,
+                                      defaultValue = "", // Se não tiver padrão, fica vazio
+                                      onChange,
+                                      placeholder = "Selecione um item...",
+                                      searchPlaceholder = "Procurar...",
+                                      emptyMessage = "Nenhum item encontrado.",
+                                  }: ComboboxProps<T>) {
     const [open, setOpen] = React.useState(false)
     const [value, setValue] = React.useState(defaultValue)
 
@@ -69,7 +73,7 @@ export function Combobox({
 
     // Encontra o label baseado no valor selecionado
     const selectedLabel = value
-        ? options.find((option) => option.value === value)?.label
+        ? options.find((option) => String(option[valueKey]) === value)?.[labelKey]
         : placeholder
 
     return (
@@ -81,7 +85,7 @@ export function Combobox({
                     aria-expanded={open}
                     className="w-full justify-between"
                 >
-                    {selectedLabel}
+                    {String(selectedLabel)}
                     <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
             </PopoverTrigger>
@@ -91,25 +95,30 @@ export function Combobox({
                     <CommandList>
                         <CommandEmpty>{emptyMessage}</CommandEmpty>
                         <CommandGroup>
-                            {options.map((option) => (
-                                <CommandItem
-                                    key={option.value}
-                                    // TRUQUE AQUI: Usamos o label como value para o filtro funcionar pelo texto visível
-                                    value={option.label}
-                                    onSelect={() => {
-                                        // Mas ao selecionar, usamos o ID original (option.value)
-                                        handleSelect(option.value)
-                                    }}
-                                >
-                                    {option.label}
-                                    <Check
-                                        className={cn(
-                                            "ml-auto h-4 w-4",
-                                            value === option.value ? "opacity-100" : "opacity-0"
-                                        )}
-                                    />
-                                </CommandItem>
-                            ))}
+                            {options.map((option) => {
+                                const optionValue = String(option[valueKey])
+                                const optionLabel = String(option[labelKey])
+
+                                return (
+                                    <CommandItem
+                                        key={optionValue}
+                                        // TRUQUE AQUI: Usamos o label como value para o filtro funcionar pelo texto visível
+                                        value={optionLabel}
+                                        onSelect={() => {
+                                            // Mas ao selecionar, usamos o ID original (option[valueKey])
+                                            handleSelect(optionValue)
+                                        }}
+                                    >
+                                        {optionLabel}
+                                        <Check
+                                            className={cn(
+                                                "ml-auto h-4 w-4",
+                                                value === optionValue ? "opacity-100" : "opacity-0"
+                                            )}
+                                        />
+                                    </CommandItem>
+                                )
+                            })}
                         </CommandGroup>
                     </CommandList>
                 </Command>

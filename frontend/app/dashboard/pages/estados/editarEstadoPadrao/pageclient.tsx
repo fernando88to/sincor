@@ -17,10 +17,6 @@ const initialState = {
 
 export function EditarEstadoPadraoPageCliente({estados}: { estados: Estado[] }) {
 
-    const estadosFormatoOption: OptionType[] = estados.map((estado) => ({
-        value: estado.id.toString(),
-        label: estado.nome,
-    }));
     const estadoSelecionado = estados.find((elemento) => {
         return elemento.estadoPadrao;
     });
@@ -67,7 +63,9 @@ export function EditarEstadoPadraoPageCliente({estados}: { estados: Estado[] }) 
                             {/* Item 1: Linha 1, Coluna 1 */}
                             <div className="space-y-2">
                                 <Label htmlFor="nome">Estado</Label>
-                                <Combobox options={estadosFormatoOption} defaultValue={estadoSelecionado?.id.toString()}/>
+                                <Combobox options={estados}
+                                          labelKey="nome" valueKey="id"
+                                          defaultValue={estadoSelecionado?.id.toString()}/>
                                 {state?.errors?.name && (
                                     <p className="text-red-500 text-sm mt-1">{state.errors.name[0]}</p>
                                 )}
