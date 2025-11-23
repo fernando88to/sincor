@@ -19,39 +19,57 @@ import {
     PopoverTrigger,
 } from "@/components/ui/popover"
 
-interface OptionsType {
+// Exportamos o tipo para poder usar em outros lugares
+export interface OptionType {
     value: string
     label: string
-    selected?: boolean
 }
 
-const frameworks: OptionsType[] = [
-    {
-        value: "next.js",
-        label: "Next.js",
-    },
-    {
-        value: "sveltekit",
-        label: "SvelteKit",
-        selected:true
-    },
-    {
-        value: "nuxt.js",
-        label: "Nuxt.js",
-    },
-    {
-        value: "remix",
-        label: "Remix",
-    },
-    {
-        value: "astro",
-        label: "Astro",
-    },
-]
+interface ComboboxProps {
+    options: OptionType[]
+    defaultValue?: string // Argumento opcional (chave do elemento padrão)
+    onChange?: (value: string) => void // Função de callback quando seleciona
+    placeholder?: string // Texto do botão quando nada selecionado
+    searchPlaceholder?: string // Texto do input de busca
+    emptyMessage?: string // Texto quando não acha nada
+}
 
-export function Combobox() {
+export function Combobox({
+                             options,
+                             defaultValue = "", // Se não tiver padrão, fica vazio
+                             onChange,
+                             placeholder = "Selecione um item...",
+                             searchPlaceholder = "Procurar...",
+                             emptyMessage = "Nenhum item encontrado.",
+                         }: ComboboxProps) {
     const [open, setOpen] = React.useState(false)
-    const [value, setValue] = React.useState(frameworks.find(framework => framework.selected)?.value || "")
+    const [value, setValue] = React.useState(defaultValue)
+
+    // Atualiza o valor interno se o defaultValue mudar externamente (opcional, mas recomendado)
+    React.useEffect(() => {
+        if (defaultValue) {
+            setValue(defaultValue)
+        }
+    }, [defaultValue])
+
+    const handleSelect = (currentValue: string) => {
+        // Se clicar no mesmo item que já está selecionado, desmarca (retorna vazio)
+        // Caso contrário, marca o novo item
+        const newValue = currentValue === value ? "" : currentValue
+
+        setValue(newValue)
+        setOpen(false)
+
+        // Avisa o componente pai que mudou
+        if (onChange) {
+            onChange(newValue)
+        }
+    }
+
+    // Encontra o label baseado no valor selecionado
+    const selectedLabel = value
+        ? options.find((option) => option.value === value)?.label
+        : placeholder
 
     return (
         <Popover open={open} onOpenChange={setOpen}>
@@ -62,32 +80,31 @@ export function Combobox() {
                     aria-expanded={open}
                     className="w-[200px] justify-between"
                 >
-                    {value
-                        ? frameworks.find((framework) => framework.value === value)?.label
-                        : "Select framework..."}
-                    <ChevronsUpDown className="opacity-50" />
+                    {selectedLabel}
+                    <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
             </PopoverTrigger>
             <PopoverContent className="w-[200px] p-0">
                 <Command>
-                    <CommandInput placeholder="Search framework..." className="h-9" />
+                    <CommandInput placeholder={searchPlaceholder} className="h-9" />
                     <CommandList>
-                        <CommandEmpty>No framework found.</CommandEmpty>
+                        <CommandEmpty>{emptyMessage}</CommandEmpty>
                         <CommandGroup>
-                            {frameworks.map((framework) => (
+                            {options.map((option) => (
                                 <CommandItem
-                                    key={framework.value}
-                                    value={framework.value}
-                                    onSelect={(currentValue) => {
-                                        setValue(currentValue === value ? "" : currentValue)
-                                        setOpen(false)
+                                    key={option.value}
+                                    // TRUQUE AQUI: Usamos o label como value para o filtro funcionar pelo texto visível
+                                    value={option.label}
+                                    onSelect={() => {
+                                        // Mas ao selecionar, usamos o ID original (option.value)
+                                        handleSelect(option.value)
                                     }}
                                 >
-                                    {framework.label}
+                                    {option.label}
                                     <Check
                                         className={cn(
-                                            "ml-auto",
-                                            value === framework.value ? "opacity-100" : "opacity-0"
+                                            "ml-auto h-4 w-4",
+                                            value === option.value ? "opacity-100" : "opacity-0"
                                         )}
                                     />
                                 </CommandItem>

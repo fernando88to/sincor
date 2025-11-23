@@ -1,16 +1,45 @@
 'use client';
 import {Button} from "@/components/ui/button";
-import {generateMeta} from "@/lib/utils";
 import {Card, CardContent, CardFooter, CardHeader, CardTitle} from "@/components/ui/card";
 import {Input} from "@/components/ui/input";
 import * as React from "react";
-import {Combobox} from "@/components/Combobox";
+import {Combobox, OptionType} from "@/components/Combobox";
+import {Estado} from "@/type/Estado";
 
 
+const frameworks: OptionType[] = [
+    {
+        value: "next.js",
+        label: "Next.js",
+    },
+    {
+        value: "sveltekit",
+        label: "SvelteKit",
 
+    },
+    {
+        value: "nuxt.js",
+        label: "Nuxt.js",
+    },
+    {
+        value: "remix",
+        label: "Remix",
+    },
+    {
+        value: "astro",
+        label: "Astro",
+    },
+]
 
-export function EditarEstadoPadraoPageCliente() {
+export function EditarEstadoPadraoPageCliente({estados}: { estados: Estado[]}) {
 
+    let estadosFormatoOption: OptionType[] = estados.map((estado) => ({
+        value: estado.id.toString(),
+        label: estado.nome,
+    }));
+    let estadoSelecionado = estados.find((elemento) => {
+        return elemento.estadoPadrao;
+    });
 
     return (
         <>
@@ -19,12 +48,7 @@ export function EditarEstadoPadraoPageCliente() {
                     <CardTitle>Selecione o estado padrão</CardTitle>
                 </CardHeader>
                 <CardContent>
-                    <Input
-                        id="message"
-                        placeholder="Type your message..."
-                        className="flex-1"
-                        autoComplete="off"/>
-                    <Combobox />
+                    <Combobox options={estadosFormatoOption} defaultValue={estadoSelecionado?.id.toString()}  />
                 </CardContent>
 
 

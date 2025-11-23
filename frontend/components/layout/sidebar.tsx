@@ -74,7 +74,7 @@ export default function Sidebar() {
             </div>
           </Fragment>
         ))}
-        <div className="sticky bottom-0 mt-10">
+        {/*<div className="sticky bottom-0 mt-10">
           <Card>
             <CardHeader>
               <CardTitle>Get Shadcn UI Kit Pro</CardTitle>
@@ -98,7 +98,7 @@ export default function Sidebar() {
               </Button>
             </CardContent>
           </Card>
-        </div>
+        </div>*/}
       </ScrollArea>
     </div>
   );
