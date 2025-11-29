@@ -20,9 +20,14 @@ public class EstadoService {
 
     @Transactional
     public Estado mudarEstadoPadrao(String sigla) {
+        if (sigla.equals("0")) {
+            // 1 - Limpar todos os estados, definindo estadoPadrao como NULL
+            estadoRepository.update("estadoPadrao = null");
+            return null;
+        }
         Optional<Estado> estado = estadoRepository.findBySigla(sigla);
-        if(estado.isEmpty()) {
-            throw  new IllegalArgumentException("Sigla inválida");
+        if (estado.isEmpty()) {
+            throw new IllegalArgumentException("Sigla inválida");
         }
         // 1 - Limpar todos os estados, definindo estadoPadrao como NULL
         estadoRepository.update("estadoPadrao = null");
@@ -30,6 +35,6 @@ public class EstadoService {
         estadoRepository.update("estadoPadrao = true where sigla = ?1", sigla);
         entityManager.clear();
         Estado estadoAtualizado = estadoRepository.findBySigla(sigla).get();
-        return  estadoAtualizado;
+        return estadoAtualizado;
     }
 }

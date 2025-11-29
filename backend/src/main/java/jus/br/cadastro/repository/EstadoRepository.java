@@ -12,4 +12,9 @@ public class EstadoRepository implements PanacheRepository<Estado> {
     public Optional<Estado> findBySigla(String sigla) {
         return find("sigla", sigla).firstResultOptional();
     }
+
+    public Optional<Estado> findEstadoPadrao() {
+        return find("estadoPadrao", true).firstResultOptional();
+    }
+
 }

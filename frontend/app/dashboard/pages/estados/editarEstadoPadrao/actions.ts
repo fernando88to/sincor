@@ -18,6 +18,7 @@ export async function cadastrarUsuario(prevState: ActionState, formData: FormDat
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
     const sigla = formData.get('sigla') as string;
+    console.log('sigla ', sigla);
 
     await clientBackendEstado.updateEstadoPadrao(sigla);
 

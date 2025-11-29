@@ -41,4 +41,14 @@ public class EstadoServiceTest {
     }
 
 
+    @Test
+    void deveZerarEstadoPadraoAoPassarSiglaZero() {
+        //GIVEN
+            String sigla = "0";
+        //WHEN
+            estadoService.mudarEstadoPadrao(sigla);
+            Optional<Estado> estadoPadrao = estadoRepository.findEstadoPadrao();
+        //THEN
+            assertTrue(estadoPadrao.isEmpty());
+    }
 }
