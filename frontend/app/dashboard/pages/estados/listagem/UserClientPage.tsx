@@ -6,6 +6,9 @@ import {ColumnDef} from "@tanstack/react-table";
 import {Estado} from "@/type/Estado";
 import {SortColumn} from "@/components/custom/datatable/SortColumn";
 import {BadgeBoolean} from "@/components/custom/badge/BadgeBoolean";
+import {Alert, AlertDescription, AlertTitle} from "@/components/ui/alert";
+import {RocketIcon} from "lucide-react";
+import {AlertMessage} from "@/components/custom/AlertMessage";
 
 const columns: ColumnDef<Estado>[] = [
     {
@@ -69,6 +72,9 @@ const columns: ColumnDef<Estado>[] = [
 ]
 
 export default function EstadoClientePage({data}: { data: any[] }) {
-    // Defina aqui as colunas que deseja filtrar
-    return <DataTable columns={columns} data={data} filterKeys={['nome', 'id', 'sigla']}/>;
+    return (<>
+        <AlertMessage mensagem='Registro Foi atualizado com ' tipo='success' />
+        <DataTable columns={columns} data={data} filterKeys={['nome', 'id', 'sigla']}/>;
+    </>);
+
 }

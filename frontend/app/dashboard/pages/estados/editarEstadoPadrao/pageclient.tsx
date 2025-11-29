@@ -21,15 +21,19 @@ export function EditarEstadoPadraoPageCliente({estados}: { estados: Estado[] }) 
         return elemento.estadoPadrao;
     });
 
-    console.log('estado selecionado ', estadoSelecionado);
-
     const [state, formAction, isPending] = useActionState<ActionState, FormData>(cadastrarUsuario, initialState);
 
     const router = useRouter();
 
-    const voltar = ()=>{
+    const voltar = () => {
         router.push('/dashboard/pages/estados/listagem')
     }
+
+    React.useEffect(() => {
+        if (state.success) {
+            router.push('/dashboard/pages/estados/listagem?mensagem=' + encodeURIComponent(state.message));
+        }
+    }, [state.success, state.message, router]);
 
     return (
         <>
