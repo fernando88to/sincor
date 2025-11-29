@@ -31,7 +31,8 @@ export function EditarEstadoPadraoPageCliente({estados}: { estados: Estado[] }) 
 
     React.useEffect(() => {
         if (state.success) {
-            router.push('/dashboard/pages/estados/listagem?mensagem=' + encodeURIComponent(state.message));
+            router.push('/dashboard/pages/estados/listagem?mensagem=' + encodeURIComponent(state.message) +
+                '&tipo=success');
         }
     }, [state.success, state.message, router]);
 

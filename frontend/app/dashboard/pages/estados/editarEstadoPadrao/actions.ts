@@ -40,6 +40,6 @@ export async function cadastrarUsuario(prevState: ActionState, formData: FormDat
     // 3. Retorno de sucesso
     return {
         success: true,
-        message: 'Estado atualizado com sucesso!',
+        message: `O estado ${sigla} foi definido como padrão com sucesso!`
     };
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import {DataTable} from "@/components/custom/datatable/DataTable";
+import {useSearchParams} from "next/navigation";
 
 import {ColumnDef} from "@tanstack/react-table";
 import {Estado} from "@/type/Estado";
@@ -72,8 +73,12 @@ const columns: ColumnDef<Estado>[] = [
 ]
 
 export default function EstadoClientePage({data}: { data: any[] }) {
+    const searchParams = useSearchParams();
+    const mensagem = searchParams.get('mensagem');
+    const typeMensagem = searchParams.get('tipo');
+
     return (<>
-        <AlertMessage mensagem='Registro Foi atualizado com ' tipo='success' />
+        {mensagem && <AlertMessage mensagem={mensagem} tipo={typeMensagem}/>}
         <DataTable columns={columns} data={data} filterKeys={['nome', 'id', 'sigla']}/>;
     </>);
 
