@@ -41,6 +41,9 @@ export const clientBackendEstado = {
         }
         return retornoApi.data as Estado[];
     },
+    updateEstadoPadrao: async (sigla: string): Promise<void> => {
+        await chamarAxios(`estado/${sigla}/padrao`, METHOD.POST, {});
+    }
 }
 export const clientBackendComarca = {
     listAll: async (): Promise<Comarca[]> => {

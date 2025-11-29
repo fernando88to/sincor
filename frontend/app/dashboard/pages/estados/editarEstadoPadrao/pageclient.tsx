@@ -21,6 +21,8 @@ export function EditarEstadoPadraoPageCliente({estados}: { estados: Estado[] }) 
         return elemento.estadoPadrao;
     });
 
+    console.log('estado selecionado ', estadoSelecionado);
+
     const [state, formAction, isPending] = useActionState<ActionState, FormData>(cadastrarUsuario, initialState);
 
     const router = useRouter();
@@ -71,8 +73,9 @@ export function EditarEstadoPadraoPageCliente({estados}: { estados: Estado[] }) 
                                 <Label htmlFor="nome">Estado</Label>
                                 <Combobox options={estados}
                                           firstOptionLabel="Nenhum estado selecionado"
-                                          labelKey="nome" valueKey="id"
-                                          defaultValue={estadoSelecionado?.id.toString()}/>
+                                          labelKey="nome" valueKey="sigla"
+                                          defaultValue={estadoSelecionado?.sigla.toString()}
+                                          name="sigla"/>
                                 {state?.errors?.name && (
                                     <p className="text-red-500 text-sm mt-1">{state.errors.name[0]}</p>
                                 )}

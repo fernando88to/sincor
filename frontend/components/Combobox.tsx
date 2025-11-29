@@ -36,6 +36,7 @@ interface ComboboxProps<T = any> {
     emptyMessage?: string // Texto quando não acha nada
     firstOptionLabel?: string // Label da primeira opção especial com value "0" (ex: "Selecionar Todos")
     className?: string
+    name?: string // Nome do campo para FormData
 }
 
 export function Combobox<T = any>({
@@ -48,6 +49,7 @@ export function Combobox<T = any>({
                                       searchPlaceholder = "Procurar...",
                                       emptyMessage = "Nenhum item encontrado.",
                                       firstOptionLabel,
+                                      name,
                                   }: ComboboxProps<T>) {
     const [open, setOpen] = React.useState(false)
     const [value, setValue] = React.useState(defaultValue)
@@ -81,7 +83,10 @@ export function Combobox<T = any>({
         : placeholder
 
     return (
-        <Popover open={open} onOpenChange={setOpen}>
+        <>
+            {/* Input hidden para enviar o valor no FormData */}
+            {name && <input type="hidden" name={name} value={value} />}
+            <Popover open={open} onOpenChange={setOpen}>
             <PopoverTrigger asChild>
                 <Button
                     variant="outline"
@@ -145,5 +150,6 @@ export function Combobox<T = any>({
                 </Command>
             </PopoverContent>
         </Popover>
+        </>
     )
 }
