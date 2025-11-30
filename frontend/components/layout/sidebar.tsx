@@ -1,16 +1,15 @@
-import { Fragment } from "react";
-import Link from "next/link";
+'use client';
+import {Fragment} from "react";
+import {usePathname} from "next/navigation";
 
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { page_routes } from "@/lib/routes-config";
+import {ScrollArea} from "@/components/ui/scroll-area";
+import {hasHrefInChildItems, page_routes} from "@/lib/routes-config";
 import Anchor from "../anchor";
 import Logo from "./logo";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
-import { Button } from "../ui/button";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import {Collapsible, CollapsibleContent, CollapsibleTrigger} from "@/components/ui/collapsible";
 import Icon from "../icon";
-import { ChevronDown, LockIcon } from "lucide-react";
-import { Badge } from "../ui/badge";
+import {ChevronDown} from "lucide-react";
+import {Badge} from "../ui/badge";
 
 type SidebarNavLinkProps = {
   item: {
@@ -25,7 +24,7 @@ export const SidebarNavLink: React.FC<SidebarNavLinkProps> = ({ item }: SidebarN
   return (
     <Anchor
       href={item.href}
-      key={item.title + item.href}
+      key={item.href}
       activeClassName="!bg-primary text-primary-foreground">
       {item.icon && <Icon name={item.icon} className="h-4 w-4" />}
       {item.title}
@@ -39,7 +38,11 @@ export const SidebarNavLink: React.FC<SidebarNavLinkProps> = ({ item }: SidebarN
 };
 
 export default function Sidebar() {
-  return (
+    const pathname = usePathname();
+    console.log(pathname);
+
+
+    return (
     <div className="fixed hidden h-screen lg:block">
       <ScrollArea className="h-full w-[--sidebar-width] border-r bg-background px-4">
         <Logo />
@@ -51,7 +54,8 @@ export default function Sidebar() {
                 return (
                   <Fragment key={item.title}>
                     {item.items?.length ? (
-                      <Collapsible className="group !block transition-all hover:data-[state=open]:bg-transparent">
+                      <Collapsible className="group !block transition-all hover:data-[state=open]:bg-transparent"
+                      defaultOpen={hasHrefInChildItems(pathname)}>
                         <CollapsibleTrigger className="flex w-full items-center gap-3">
                           {item.icon && <Icon name={item.icon} className="h-4 w-4" />}
                           {item.title}
@@ -60,7 +64,7 @@ export default function Sidebar() {
                         <CollapsibleContent className="overflow-hidden data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down">
                           <div className="py-2 *:flex *:items-center *:gap-3 *:rounded-lg *:px-7 *:py-2 *:transition-all hover:*:bg-muted">
                             {item.items.map((item, key) => (
-                              <SidebarNavLink key={key} item={item} />
+                                <SidebarNavLink key={key} item={item}    />
                             ))}
                           </div>
                         </CollapsibleContent>

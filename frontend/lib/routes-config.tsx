@@ -11,6 +11,25 @@ type PageRoutesItemType = {
     items?: PageRoutesItemType;
 }[];
 
+export const hasHrefInChildItems = (href: string): boolean => {
+    const checkItems = (items: PageRoutesItemType): boolean => {
+        for (const item of items) {
+            if (item.items) {
+                if (item.items.some(subItem => subItem.href === href)) {
+                    return true;
+                }
+                if (checkItems(item.items)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    };
+
+    return page_routes.some(route => checkItems(route.items));
+};
+
+
 export const page_routes: PageRoutesType[] = [
     {
         title: "Menu",
