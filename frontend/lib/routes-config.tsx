@@ -45,9 +45,7 @@ export const page_routes: PageRoutesType[] = [
                 icon: "ClipboardList",
                 items: [
                     {title: "Estado", href: "/dashboard/pages/estados/listagem"},
-                    {title: "Comarca", href: "/dashboard/pages/comarcas"},
-                    {title: "Distritos", href: "/dashboard/pages/distritos"},
-                    {title: "Cartórios", href: "/dashboard/pages/cartorios"},
+                    {title: "Comarca", href: "/dashboard/pages/comarcas/listagem"},
                 ]
             },
 
